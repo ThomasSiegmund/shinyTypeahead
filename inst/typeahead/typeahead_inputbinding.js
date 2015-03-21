@@ -4,7 +4,7 @@ var typeAheadBinding = new Shiny.InputBinding();
 $.extend(typeAheadBinding, {
 
     find: function(scope) {
-      return $(scope).find('.sbs-typeahead');
+      return $(scope).find('.typeahead');
     },
     getId: function(el) {
       return Shiny.InputBinding.prototype.getId.call(this, el) || el.name;
@@ -27,10 +27,9 @@ $.extend(typeAheadBinding, {
       });
     },
     unsubscribe: function(el) {
-      $(el).off('.textInputBinding');
+      $(el).off('.typeAheadBinding');
     },
     receiveMessage: function(el, data) {
-
       if (data.hasOwnProperty('value')) {
         this.setValue(el, data.value);
       };
@@ -59,3 +58,23 @@ $.extend(typeAheadBinding, {
 
 });
 Shiny.inputBindings.register(typeAheadBinding);
+
+
+
+Shiny.addCustomMessageHandler("typeaheadUpdate", function(data) {
+
+  var typeahead = $("input#" + data.id);
+
+      if (data.hasOwnProperty('value')) {
+        typeahead[0].value = data.value;
+      };
+      if (data.hasOwnProperty('label')) {
+        typeahead.parent().find('label[for=' + data.id + ']').text(data.label);
+      };
+      if (data.hasOwnProperty('choices')) {
+        typeahead.data('typeahead').source = data.choices;
+      };
+
+      typeahead.trigger('change');
+
+})
