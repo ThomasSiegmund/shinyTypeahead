@@ -44,14 +44,18 @@ bsTypeAhead <- function(inputId, label, value = "", choices, items=8, minLength=
 
   choices <- paste0("[\'", paste0(choices, collapse="\', \'") , "\']")
 
-  sbsHead(shiny::tagList(tags$label(label, `for` = inputId),
-                  tags$input(id = inputId, type="text", class="sbs-typeahead",
-                             "data-provide"="typeahead", autocomplete="off",
+  sbsHead(shiny::tagList(
+            shiny::div(class = 'form-group shiny-input-container',
+            tags$label(label, `for` = inputId),
+                  tags$input(id = inputId, type="text",
+                             class="form-control shiny-bound-input typeahead sbs-typeahead",
+                             "data-provide" = "typeahead", autocomplete="off",
                              value = value),
                   tags$script(paste0("$('#", inputId, "').typeahead({source: ", choices, ",
                                                                      items: ", items, ",
                                                                      minLength: ", minLength, "})"))
                   )
+          )
   )
 
 

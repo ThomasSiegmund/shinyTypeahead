@@ -10,7 +10,8 @@ data(mtcars)
 ui <- shinyUI(fluidPage(
   title = 'Basic usage of D3TableFilter in Shiny',
   fluidRow(
-    bsTypeAhead('firstinput', label = "My first typeahead", choices = c("eins", "zwei", "drei")),
+    textInput('standard', label = "normal textinput"),
+    bsTypeAhead('firstTypeaheadInput', label = "My first typeahead", choices = c("eins", "zwei", "drei")),
     textOutput('firstoutput')
   )
 ))
@@ -18,7 +19,8 @@ ui <- shinyUI(fluidPage(
 # server.R
 # --------------------------------------------------------
 server <- shinyServer(function(input, output, session) {
-  output$firstoutput <- renderText(input$firstinput)
+  output$standardoutput <- renderText(input$standard)
+  output$firstoutput <- renderText(input$firstTypeaheadInput)
 
 })
 
