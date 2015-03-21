@@ -1,0 +1,13 @@
+Package: shinyTypeahead
+Type: Package
+Title: TypeAhead input binding for shiny based on twitter typeahead
+Version: 0.1
+Date: 2015-03-18
+Authors@R: c(person("Thomas", "Siegmund", email = "thomas.siegmund@gmail.com",
+    role = c("aut", "cre")),
+        person(family = "Twitter Inc.", role = c("ctb", "cph"),
+          comment = "Bootstrap library and CSS; authors listed in https://github.com/orgs/twbs/people")
+        )
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+LazyData: TRUE
