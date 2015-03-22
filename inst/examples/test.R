@@ -3,21 +3,26 @@
 
 library(shiny)
 library(shinyTypeahead)
+library(shinythemes)
+
 data(mtcars)
 data(islands)
 
 # ui.R
 # --------------------------------------------------------
-ui <- shinyUI(fluidPage(
+ui <- shinyUI(fluidPage(theme = shinytheme("journal"),
   title = 'shinyTypeahead test app',
   fluidRow(
     textInput('standard', label = "Normal textInput"),
     textOutput("standardoutput"),
     selectInput("choices", "Choices", choices = c("cars", "islands")),
-    bsTypeAhead('firstTypeaheadInput', label = "My first typeahead", choices = c("eins", "zwei", "drei")),
+    typeaheadInput('firstTypeaheadInput', label = "My first typeahead", choices = c("eins", "zwei", "drei")),
 
     textOutput('firstoutput'),
-    bsTypeAhead('secondTypeaheadInput', label = "My second typeahead", choices = 'function () {return ["one", "two", "three"]}'),
+
+    # see: http://tatiyants.com/how-to-use-json-objects-with-twitter-bootstrap-typeahead/
+    typeaheadInput('secondTypeaheadInput', label = "My second typeahead", choices = htmlwidgets::JS('function (query, process) { states = ["California", "Arizona", "New York", "Nevada", "Ohio"];
+    process(states);}')),
     textOutput('secondoutput')
   )
 ))
@@ -38,7 +43,7 @@ server <- shinyServer(function(input, output, session) {
       choices <- c("eins", "zwei", "drei")
     }
 
-    updateTypeAhead(session, "firstTypeaheadInput", choices = choices);
+    updateTypeaheadInput(session, "firstTypeaheadInput", value = '', choices = choices);
   })
 
 })

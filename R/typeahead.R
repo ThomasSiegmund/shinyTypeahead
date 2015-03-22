@@ -8,13 +8,29 @@
 
 deps <- htmltools::htmlDependency("shinyTypeahead", packageVersion("shinyTypeahead"),
                                         src = c("href" = "typeahead"),
-                                        script = c("bootstrap3-typeahead.js", "typeahead_inputbinding.js"),
-                                        stylesheet = "typehead.js-bootstrap3.css");
+                                        script = c("bootstrap3-typeahead.js", "typeahead_inputbinding.js"));
 
-# Create a typeahead text input
-bsTypeAhead <- function(inputId, label, value = "", choices, items=8, minLength=1) {
+#'typeaheadInput
+#'
+#'\code{typeaheadInput} creates a textinput with type ahead function buttons.
+#'
+#'@param inputId Input variable to assign the control's value to
+#'@param label Display label for the control
+#'@param value Initial value
+#'@param choices Array of strings to match against. Can also be JavaScript
+#'  function. Use htmlwidgets::JS() to indicate JavaScript.
+#'@param items The max number of items to display in the dropdown. Can also be
+#'  set to 'all'
+#'@param minLength The minimum character length needed before triggering
+#'  autocomplete suggestions. You can set it to 0 so suggestion are shown even
+#'  when there is no text when lookup function is called.
+#'@seealso \code{\link{updateTypeaheadInput}}
+#'@export
+typeaheadInput <- function(inputId, label, value = "", choices, items = 8, minLength = 1) {
 
-  choices <- paste0("[\'", paste0(choices, collapse="\', \'") , "\']")
+  if(!'JS_EVAL' %in% class(choices)) {
+    choices <- jsonlite::toJSON(choices);
+  }
 
   typeahead <- shiny::tagList(
             shiny::div(class = 'form-group shiny-input-container',
@@ -32,9 +48,18 @@ bsTypeAhead <- function(inputId, label, value = "", choices, items=8, minLength=
 }
 
 
-# Update a typeahead element from server.R
-updateTypeAhead <- function(session, inputId, label=NULL, value=NULL, choices=NULL) {
-
+#'updateTypeaheadInput
+#'
+#'\code{updateTypeaheadInput} Update a typeaheadInput buttons.
+#'@param session The session object passed to function given to shinyServer.
+#'@param inputId Input variable to assign the control's value to
+#'@param label Display label for the control
+#'@param value Initial value
+#'@param choices Array of strings to match against. Can also be JavaScript
+#'  function. Use htmlwidgets::JS() to indicate JavaScript.
+#'@seealso \code{\link{typeaheadInput}}
+#'@export
+updateTypeaheadInput <- function(session, inputId, label=NULL, value=NULL, choices=NULL) {
   data <- dropNulls(list(id = inputId, label=label, value=value, choices=choices))
   session$sendCustomMessage("typeaheadUpdate", data)
 }

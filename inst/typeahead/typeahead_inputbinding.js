@@ -74,7 +74,6 @@ Shiny.addCustomMessageHandler("typeaheadUpdate", function(data) {
       if (data.hasOwnProperty('choices')) {
         typeahead.data('typeahead').source = data.choices;
       };
-
       typeahead.trigger('change');
 
 })

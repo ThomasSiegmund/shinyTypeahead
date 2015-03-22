@@ -1,13 +1,18 @@
 Package: shinyTypeahead
 Type: Package
-Title: TypeAhead input binding for shiny based on twitter typeahead
+Title: Simple type ahead text input for shiny
 Version: 0.1
 Date: 2015-03-18
 Authors@R: c(person("Thomas", "Siegmund", email = "thomas.siegmund@gmail.com",
     role = c("aut", "cre")),
+            person("Bass", "Jobsen", email = "bass@w3masters.nl",
+    role = c("ctb", "cph")),
         person(family = "Twitter Inc.", role = c("ctb", "cph"),
           comment = "Bootstrap library and CSS; authors listed in https://github.com/orgs/twbs/people")
         )
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Description: Typeahead text input based on the Bootstrap2 typeahead plugin for use with Bootstrap3.
+License: MIT
 LazyData: TRUE
+Imports:
+    jsonlite (>= 0.9.14),
+    htmltools (>= 0.2.6)
