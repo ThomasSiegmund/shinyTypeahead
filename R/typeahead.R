@@ -6,7 +6,7 @@
 
 }
 
-shinyBSDep <- htmltools::htmlDependency("shinyTypeahead", packageVersion("shinyTypeahead"),
+deps <- htmltools::htmlDependency("shinyTypeahead", packageVersion("shinyTypeahead"),
                                         src = c("href" = "typeahead"),
                                         script = c("bootstrap3-typeahead.js", "typeahead_inputbinding.js"),
                                         stylesheet = "typehead.js-bootstrap3.css");
@@ -24,11 +24,11 @@ bsTypeAhead <- function(inputId, label, value = "", choices, items=8, minLength=
                              "data-provide" = "typeahead", autocomplete="off",
                              value = value),
                   shiny::tags$script(paste0("$('#", inputId, "').typeahead({source: ", choices, ",
-                                                                     items: ", items, ",
-                                                                     minLength: ", minLength, "})"))
+                                     items: ", items, ",
+                                      minLength: ", minLength, "})"))
                   )
           )
-  htmltools::attachDependencies(typeahead, shinyBSDep)
+  htmltools::attachDependencies(typeahead, deps)
 }
 
 

@@ -11,11 +11,14 @@ data(islands)
 ui <- shinyUI(fluidPage(
   title = 'shinyTypeahead test app',
   fluidRow(
-    textInput('standard', label = "normal textinput"),
+    textInput('standard', label = "Normal textInput"),
     textOutput("standardoutput"),
     selectInput("choices", "Choices", choices = c("cars", "islands")),
     bsTypeAhead('firstTypeaheadInput', label = "My first typeahead", choices = c("eins", "zwei", "drei")),
-    textOutput('firstoutput')
+
+    textOutput('firstoutput'),
+    bsTypeAhead('secondTypeaheadInput', label = "My second typeahead", choices = 'function () {return ["one", "two", "three"]}'),
+    textOutput('secondoutput')
   )
 ))
 
@@ -24,6 +27,7 @@ ui <- shinyUI(fluidPage(
 server <- shinyServer(function(input, output, session) {
   output$standardoutput <- renderText(input$standard)
   output$firstoutput <- renderText(input$firstTypeaheadInput)
+  output$secondoutput <- renderText(input$secondTypeaheadInput)
 
   observe( {
     if(input$choices == "cars") {
@@ -33,8 +37,8 @@ server <- shinyServer(function(input, output, session) {
     } else {
       choices <- c("eins", "zwei", "drei")
     }
-    updateTypeAhead(session, "firstTypeaheadInput", value = "vier", label = "Newlabel", choices = choices);
-   updateTextInput(session, "standard", value = choices[[1]])
+
+    updateTypeAhead(session, "firstTypeaheadInput", choices = choices);
   })
 
 })
