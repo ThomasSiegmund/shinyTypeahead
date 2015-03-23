@@ -14,14 +14,20 @@ typeaheadInput(inputId, label, value = "", choices, items = 8,
 
 \item{value}{Initial value}
 
-\item{choices}{Array of strings to match against. Can also be JavaScript function. Use htmlwidgets::JS() to indicate JavaScript.}
+\item{choices}{Array of strings to match against. Can also be JavaScript
+function. Use htmlwidgets::JS() to indicate JavaScript. The length of \code{choices} must no exceed 131370.}
 
-\item{items}{The max number of items to display in the dropdown. Can also be set to 'all'}
+\item{items}{The max number of items to display in the dropdown. Can also be
+set to 'all'}
 
-\item{minLength}{The minimum character length needed before triggering autocomplete suggestions. You can set it to 0 so suggestion are shown even when there is no text when lookup function is called.}
+\item{minLength}{The minimum character length needed before triggering
+autocomplete suggestions. You can set it to 0 so suggestion are shown even
+when there is no text when lookup function is called.}
 }
 \description{
-\code{typeaheadInput} creates a textinput with type ahead function
-buttons.
+\code{typeaheadInput} creates a textinput with type ahead function buttons.
+}
+\seealso{
+\code{\link{updateTypeaheadInput}}
 }
 

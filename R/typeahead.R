@@ -18,7 +18,7 @@ deps <- htmltools::htmlDependency("shinyTypeahead", packageVersion("shinyTypeahe
 #'@param label Display label for the control
 #'@param value Initial value
 #'@param choices Array of strings to match against. Can also be JavaScript
-#'  function. Use htmlwidgets::JS() to indicate JavaScript.
+#'  function. Use htmlwidgets::JS() to indicate JavaScript. The length of \code{choices} must no exceed 131370.
 #'@param items The max number of items to display in the dropdown. Can also be
 #'  set to 'all'
 #'@param minLength The minimum character length needed before triggering
@@ -27,6 +27,12 @@ deps <- htmltools::htmlDependency("shinyTypeahead", packageVersion("shinyTypeahe
 #'@seealso \code{\link{updateTypeaheadInput}}
 #'@export
 typeaheadInput <- function(inputId, label, value = "", choices, items = 8, minLength = 1) {
+
+  if(!is.null(choices)) {
+    if(length(choices) > 131370) {
+    warning("Due to a limitation of the Bootstrap2 Typeahead JavaScript library the length of 'choices' must not exceed 2 ^ 17 - 2!");
+    }
+  }
 
   if(!'JS_EVAL' %in% class(choices)) {
     choices <- jsonlite::toJSON(choices);
@@ -60,6 +66,13 @@ typeaheadInput <- function(inputId, label, value = "", choices, items = 8, minLe
 #'@seealso \code{\link{typeaheadInput}}
 #'@export
 updateTypeaheadInput <- function(session, inputId, label=NULL, value=NULL, choices=NULL) {
+
+  if(!is.null(choices)) {
+    if(length(choices) > 131370) {
+      warning("Due to a limitation of the Bootstrap2 Typeahead JavaScript library the length of 'choices' must not exceed 2 ^ 17 - 2!");
+    }
+  }
+
   data <- dropNulls(list(id = inputId, label=label, value=value, choices=choices))
   session$sendCustomMessage("typeaheadUpdate", data)
 }

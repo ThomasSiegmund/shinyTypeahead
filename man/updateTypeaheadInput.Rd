@@ -16,11 +16,11 @@ updateTypeaheadInput(session, inputId, label = NULL, value = NULL,
 
 \item{value}{Initial value}
 
-\item{choices}{Array of strings to match against. Can also be JavaScript function. Use htmlwidgets::JS() to indicate JavaScript.}
+\item{choices}{Array of strings to match against. Can also be JavaScript
+function. Use htmlwidgets::JS() to indicate JavaScript.}
 }
 \description{
-\code{updateTypeaheadInput} Update a typeaheadInput
-buttons.
+\code{updateTypeaheadInput} Update a typeaheadInput buttons.
 }
 \seealso{
 \code{\link{typeaheadInput}}
