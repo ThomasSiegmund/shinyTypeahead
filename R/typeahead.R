@@ -1,3 +1,6 @@
+library(shiny)
+library(htmltools)
+library(jsonlite)
 .onAttach <- function(...) {
 
   # Create link to javascript and css files for package
