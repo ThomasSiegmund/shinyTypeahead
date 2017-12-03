@@ -1,7 +1,7 @@
 Package: shinyTypeahead
 Type: Package
 Title: Simple type ahead text input for shiny
-Version: 0.1
+Version: 0.2
 Date: 2015-03-18
 Authors@R: c(person("Thomas", "Siegmund", email = "thomas.siegmund@gmail.com",
     role = c("aut", "cre")),
@@ -10,7 +10,7 @@ Authors@R: c(person("Thomas", "Siegmund", email = "thomas.siegmund@gmail.com",
         person(family = "Twitter Inc.", role = c("ctb", "cph"),
           comment = "Bootstrap library and CSS; authors listed in https://github.com/orgs/twbs/people")
         )
-Description: Typeahead text input based on the Bootstrap2 typeahead plugin for use with Bootstrap3.
+Description: Typeahead text input based on the Bootstrap2 typeahead plugin for use with Bootstrap3/4.
 License: MIT
 LazyData: TRUE
 Imports:
