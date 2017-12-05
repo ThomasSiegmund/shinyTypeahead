@@ -1,4 +1,4 @@
-.onAttach <- function(...) {
+.onLoad <- function(...) {
 
   # Create link to javascript and css files for package
   shiny::addResourcePath("typeahead", system.file('typeahead',
