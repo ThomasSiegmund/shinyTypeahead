@@ -24,9 +24,10 @@ deps <- htmltools::htmlDependency("shinyTypeahead", packageVersion("shinyTypeahe
 #'@param minLength The minimum character length needed before triggering
 #'  autocomplete suggestions. You can set it to 0 so suggestion are shown even
 #'  when there is no text when lookup function is called.
+#'@param placeholder Text to be displayed before any input is made
 #'@seealso \code{\link{updateTypeaheadInput}}
 #'@export
-typeaheadInput <- function(inputId, label, value = "", choices, items = 8, minLength = 1) {
+typeaheadInput <- function(inputId, label, value = "", choices, items = 8, minLength = 1, placeholder = NULL) {
 
   if(!is.null(choices)) {
     if(length(choices) > 131370) {
@@ -44,7 +45,7 @@ typeaheadInput <- function(inputId, label, value = "", choices, items = 8, minLe
                   shiny::tags$input(id = inputId, type="text",
                              class="form-control shiny-bound-input typeahead",
                              "data-provide" = "typeahead", autocomplete="off",
-                             value = value),
+                             value = value, placeholder = placeholder),
                   shiny::tags$script(paste0("$('#", inputId, "').typeahead({source: ", choices, ",
                                      items: ", items, ",
                                       minLength: ", minLength, "})"))
